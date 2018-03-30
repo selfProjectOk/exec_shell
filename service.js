@@ -1,23 +1,36 @@
 
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// 加response header 解决跨域
-var headerMap = {
-  'Access-Control-Allow-Credentials':true,
-  'Access-Control-Allow-Headers':'Token,AppId,AppVersion,Channel,Model,OS,OSVersion,Sign,Timestamp,UUID,content-type,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range',
-  'Access-Control-Allow-Methods':'POST, GET, OPTIONS, DELETE',
-  'Access-Control-Allow-Origin':'*',
-  'Access-Control-Max-Age':3600,
-  'Allow':'GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH',
-};
-app.all('*', function(req, res, next) {
-  res.set(headerMap);
-  next();
+let fs = require('fs');
+let express = require('express')
+let path = require("path");
+let app = express()
+
+//设置静态页面
+app.use("/shell", express.static(__dirname + '/shell'));
+app.use("/static", express.static(__dirname + '/views/static'));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+//首页
+app.get('/', function (req, res) {
+  let baseUrl = __dirname + '/shell';
+  var result = fs.readdirSync(baseUrl);
+  result = (result instanceof Array) ? result : [];
+  result = result.filter(function (v) {
+    return fs.statSync(baseUrl + '/' + v).isFile() && v.match(/.sh$/);
+  });
+  res.locals.links = result;
+  res.render("index.ejs");
+});
+// 扫描趋势变化
+app.get('/exec/:name', function (req, res) {
+  console.log(req.params.name);
+  res.send('666');
 });
 
-console.log("http://localhost:8907");
-app.listen(8907);
+
+console.log("http://localhost:8907")
+app.listen(8907)
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,height=device-height">
+  <title>执行shell</title>
+  <style></style>
+  <style>
+  </style>
+</head>
+<body>
+<h1>shell列表</h1>
+<div class="link">
+  <% for(var i = 0; i < links.length; i++) {%>
+  <p>
+    <span><%= links[i]%></span>
+    <a style="font-size: 12px" onclick="execShell('<%= links[i]%>')">（执行）</a>
+  </p>
+  <% } %>
+</div>
+<script src="/static/axios.min.js"></script>
+<script>
+  function execShell(shellName) {
+    axios.get("/exec/" + shellName).
+    then(function(res) {
+    });
+  }
+</script>
+</body>
+</html>
