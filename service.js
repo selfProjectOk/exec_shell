@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
   res.locals.links = result;
   res.render("index.ejs");
 });
-// 扫描趋势变化
+// 执行shell文件
 app.get('/exec/:name', function (req, res) {
   console.log(req.params.name);
   res.send('666');
