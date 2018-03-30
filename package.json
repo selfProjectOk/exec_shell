@@ -1,0 +1,22 @@
+{
+  "name": "exec_shell",
+  "version": "1.0.0",
+  "description": "执行shell",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selfProjectOk/exec_shell.git"
+  },
+  "author": "fenghuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/selfProjectOk/exec_shell/issues"
+  },
+  "homepage": "https://github.com/selfProjectOk/exec_shell#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

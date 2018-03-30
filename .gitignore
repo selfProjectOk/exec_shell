@@ -1,0 +1,7 @@
+
+# Dependency directories
+node_modules/
+
+# intelliJ IDEA
+.idea
+.DS_Store
