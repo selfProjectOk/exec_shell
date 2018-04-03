@@ -4,6 +4,7 @@ let fs = require('fs');
 let express = require('express')
 let path = require("path");
 let app = express()
+let process = require('child_process');
 
 //设置静态页面
 app.use("/shell", express.static(__dirname + '/shell'));
@@ -26,7 +27,10 @@ app.get('/', function (req, res) {
 });
 // 执行shell文件
 app.get('/exec/:name', function (req, res) {
-  console.log(req.params.name);
+  let baseUrl = __dirname + '/shell/';
+  process.exec('/bin/bash ' + baseUrl + req.params.name, function (err) {
+    console.log(err);
+  });
   res.send('666');
 });
 
