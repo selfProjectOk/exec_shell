@@ -16,4 +16,6 @@ filePath=`get_base_path`
 fileName=`get_file_name`
 logPath="$filePath/../log"
 cd ${logPath}
-touch "${"${fileName}"%.sh}.log"
+echo ${var%%/*}
+echo ${fileName%%.sh}
+touch "${fileName%%.sh}.log"
